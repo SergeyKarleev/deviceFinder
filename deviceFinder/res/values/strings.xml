@@ -5,17 +5,22 @@
     <string name="action_settings">Settings</string>
     
     <!-- Тексты экрана настроек -->
-    <string name="title_code_callback">Кодовое слово:\n"перезвони мне"</string>
-    <string name="title_code_geo">Кодовое слово:\n"сообщи координаты"</string>
+    <string name="title_code_callback">Кодовое слово:\nПерезвони мне</string>
+    <string name="title_code_geo">Кодовое слово:\nСообщи координаты</string>
 
-    <string name="title_phone_1">Доверенный телефон №1</string>
-    <string name="title_phone_2">Доверенный телефон №2</string>
-    <string name="title_phone_3">Доверенный телефон №3</string>
+    <string name="title_phone_1">Доверенный\nтелефон №1</string>
+    <string name="title_phone_2">Доверенный\nтелефон №2</string>
+    <string name="title_phone_3">Доверенный\nтелефон №3</string>
     
-    <string name="title_phone_help">+7XXXxxxXXxx</string>
+    <string name="title_phone_hint">+7XXXxxxXXxx</string>
     
     <string name="button_save">Сохранить</string>
-    <string name="button_cancel">Отменить</string>
+    <string name="button_exit">Выйти</string>
+    
+    
+    <string name="message_save_ok">Настройки сохранены</string>
+    <string name="message_save_duplicate">Кодовые фразы должны различаться</string>
+    <string name="message_save_error">Ошибка сохранения</string>
     
 
 </resources>

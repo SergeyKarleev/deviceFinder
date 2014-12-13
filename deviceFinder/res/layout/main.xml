@@ -64,6 +64,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:ems="10"
+            android:hint="@string/title_phone_hint"
             android:inputType="phone" />
     </LinearLayout>
 
@@ -84,6 +85,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:ems="10"
+            android:hint="@string/title_phone_hint"
             android:inputType="phone" />
     </LinearLayout>
 
@@ -99,11 +101,12 @@
             android:text="@string/title_phone_3" />
 
         <EditText
-            android:id="@+id/editText4"
+            android:id="@+id/etPhone3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:ems="10"
+            android:hint="@string/title_phone_hint"
             android:inputType="phone" />
     </LinearLayout>
 
@@ -118,14 +121,16 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="@string/button_save" />
+            android:text="@string/button_save" 
+            android:onClick="buttonClick"/>
 
         <Button
-            android:id="@+id/btnCancel"
+            android:id="@+id/btnExit"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="@string/button_cancel" />
+            android:text="@string/button_exit" 
+            android:onClick="buttonClick"/>
     </LinearLayout>
 
 </LinearLayout>
