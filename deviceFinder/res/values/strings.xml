@@ -17,10 +17,13 @@
     <string name="button_save">Сохранить</string>
     <string name="button_exit">Выйти</string>
     
-    
+    <!-- Сообщения при сохраненнии настроек -->
     <string name="message_save_ok">Настройки сохранены</string>
     <string name="message_save_duplicate">Кодовые фразы должны различаться</string>
     <string name="message_save_error">Ошибка сохранения</string>
     
-
+    <!-- Сообщения мониторинга смс -->
+    <string name="monitor_empty_codes">Кодовые фразы не заданы</string>	
+    <string name="monitor_empty_phones">Доверенные телефоны не обнаружены</string>	
+    
 </resources>

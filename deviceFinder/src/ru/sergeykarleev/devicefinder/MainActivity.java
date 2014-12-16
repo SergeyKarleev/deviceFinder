@@ -7,24 +7,25 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.widget.EditText;
 import android.widget.Toast;
 
 public class MainActivity extends Activity {
 
-	private final static String CODE_CALLBACK = "CodeCallBack";
-	private final static String CODE_GEO = "CodeGEO";
-
-	private final static String PHONE_FIRST = "FirstPhone";
-	private final static String PHONE_SECOND = "SecondPhone";
-	private final static String PHONE_THIRD = "ThirdPhone";
+	// private final static String CODE_CALLBACK = "CodeCallBack";
+	// private final static String CODE_GEO = "CodeGEO";
+	//
+	// private final static String PHONE_FIRST = "FirstPhone";
+	// private final static String PHONE_SECOND = "SecondPhone";
+	// private final static String PHONE_THIRD = "ThirdPhone";
 
 	EditText etCodeCallback;
 	EditText etCodeGEO;
 	EditText etPhone1;
 	EditText etPhone2;
 	EditText etPhone3;
+
+	private final static String HIDE_STRING = "**********";
 
 	SharedPreferences sPref;
 
@@ -33,19 +34,32 @@ public class MainActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main);
 
-		sPref = getPreferences(MODE_PRIVATE);
+		sPref = getSharedPreferences(SMSMonitor.PREF_NAME, MODE_PRIVATE);
+
 		etCodeCallback = (EditText) findViewById(R.id.etCodeCallback);
-		etCodeCallback.setText(sPref.getString(CODE_CALLBACK, null));
-
 		etCodeGEO = (EditText) findViewById(R.id.etCodeGEO);
-		etCodeGEO.setText(sPref.getString(CODE_GEO, null));
-
 		etPhone1 = (EditText) findViewById(R.id.etPhone1);
-		etPhone1.setText(sPref.getString(PHONE_FIRST, null));
 		etPhone2 = (EditText) findViewById(R.id.etPhone2);
-		etPhone2.setText(sPref.getString(PHONE_SECOND, null));
 		etPhone3 = (EditText) findViewById(R.id.etPhone3);
-		etPhone3.setText(sPref.getString(PHONE_THIRD, null));
+
+		int codeCallback = sPref.getInt(SMSMonitor.CODE_CALLBACK, 0);
+		int codeGEO = sPref.getInt(SMSMonitor.CODE_GEO, 0);
+		int phone1 = sPref.getInt(SMSMonitor.PHONE_FIRST, 0);
+		int phone2 = sPref.getInt(SMSMonitor.PHONE_SECOND, 0);
+		int phone3 = sPref.getInt(SMSMonitor.PHONE_THIRD, 0);
+
+		etCodeCallback.setText(fieldFilling(codeCallback));
+		etCodeGEO.setText(fieldFilling(codeGEO));
+		etPhone1.setText(fieldFilling(phone1));
+		etPhone2.setText(fieldFilling(phone2));
+		etPhone3.setText(fieldFilling(phone3));
+	}
+
+	private String fieldFilling(int value) {
+		if (value != 0) {
+			return HIDE_STRING;
+		}
+		return null;
 	}
 
 	public void buttonClick(View v) {
@@ -53,30 +67,46 @@ public class MainActivity extends Activity {
 		case R.id.btnSave:
 			String callback = etCodeCallback.getText().toString();
 			String geo = etCodeGEO.getText().toString();
-			if ((callback.equals(geo) && callback.isEmpty())
-					|| (!callback.equals(geo)))
-				try {
-					Editor ed = sPref.edit();
-					ed.putString(CODE_CALLBACK, etCodeCallback.getText()
-							.toString());
-					ed.putString(CODE_GEO, etCodeGEO.getText().toString());
-					ed.putString(PHONE_FIRST, etPhone1.getText().toString());
-					ed.putString(PHONE_SECOND, etPhone2.getText().toString());
-					ed.putString(PHONE_THIRD, etPhone3.getText().toString());
-					ed.commit();
-					Toast.makeText(this,
-							getResources().getString(R.string.message_save_ok),
-							Toast.LENGTH_SHORT).show();
-				} catch (Exception e) {
-					Toast.makeText(
-							this,
-							getResources().getString(
-									R.string.message_save_error),
-							Toast.LENGTH_SHORT).show();
-				}
-			else {
+
+			if (callback.equals(geo) && !callback.equals(HIDE_STRING)
+					&& !callback.isEmpty())
+
+			{
+				Toast.makeText(
+						this,
+						getResources().getString(
+								R.string.message_save_duplicate),
+						Toast.LENGTH_SHORT).show();
+				break;
+			}
+
+			try {
+				Editor ed = sPref.edit();
+
+				if (etCodeCallback.getText().toString() != HIDE_STRING)
+					ed.putInt(SMSMonitor.CODE_CALLBACK, etCodeCallback
+							.getText().toString().hashCode());
+
+				if (etCodeGEO.getText().toString() != HIDE_STRING)
+					ed.putInt(SMSMonitor.CODE_GEO, etCodeGEO.getText()
+							.toString().hashCode());
+
+				if (etPhone1.getText().toString() != HIDE_STRING)
+					ed.putInt(SMSMonitor.PHONE_FIRST, etPhone1.getText()
+							.toString().hashCode());
+				if (etPhone2.getText().toString() != HIDE_STRING)
+					ed.putInt(SMSMonitor.PHONE_SECOND, etPhone2.getText()
+							.toString().hashCode());
+				if (etPhone3.getText().toString() != HIDE_STRING)
+					ed.putInt(SMSMonitor.PHONE_THIRD, etPhone3.getText()
+							.toString().hashCode());
+				ed.commit();
 				Toast.makeText(this,
-						getResources().getString(R.string.message_save_duplicate),
+						getResources().getString(R.string.message_save_ok),
+						Toast.LENGTH_SHORT).show();
+			} catch (Exception e) {
+				Toast.makeText(this,
+						getResources().getString(R.string.message_save_error),
 						Toast.LENGTH_SHORT).show();
 			}
 			break;
