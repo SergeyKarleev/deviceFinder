@@ -77,7 +77,7 @@ public class SMSMonitor extends BroadcastReceiver {
 
 	private void startBot(String sender, int hashCode) {
 
-		Log.d(LOG_TAG, "StartBot\n"+"Hash:"+String.valueOf(hashCode)+"\nCALLBACK: "+sPref.getInt(CODE_CALLBACK, 0)+"\nSEND: "+sPref.getInt(CODE_GEO, 0));
+		Log.d(LOG_TAG, "StartBot\n"+"Hash:"+hashCode+"\nCALLBACK: "+sPref.getInt(CODE_CALLBACK, 0)+"\nSEND: "+sPref.getInt(CODE_GEO, 0));
 		
 		if (hashCode == 0)
 			return;

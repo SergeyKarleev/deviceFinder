@@ -1,26 +1,38 @@
 package ru.sergeykarleev.devicefinder.bot_classes;
 
 /**
- * Данный класс выполняет следующие функции: 1. Принимает от SMSMonitor [номер
- * отправителя] и [текст сообщения] сравнивает с кодами в SharedPreferences 2.
- * GPS ON -> записывает координаты -> GPS OFF -> SEND SMS 3. Делает callback на
- * номер отправителя, блокируя при этом устройство
- * 
+ * Потомки данного класса выполняют функции по обратной связи с инициатором в
+ * зависимости от запрограммированных функций
  * 
  * @author SergeyKarleev
  * 
  */
-public class AutoBot {
+public abstract class AutoBot {
 	private String sender;
-	
 
-	/**Конструктор включает параметры
-	 * @param sender - номер отправителя сообщения 
+	/**
+	 * Конструктор включает параметры
+	 * 
+	 * @param sender
+	 *            - номер отправителя сообщения
 	 */
 	public AutoBot(String sender) {
 		super();
 		this.sender = sender;
-	
 	}
+
+	/**
+	 * Основной метод бота (отправить смс с координатами, перезвонить, отправить
+	 * eMail)
+	 * Здесь формируется соответствующий Intent и вызывается Activity с данным Intent
+	 */
+	abstract void activate();
+	
+	/**
+	 * Метод получения координат любым доступным способом.
+	 * Вызывается из метода activate()	 
+	 * @return строка с координатами
+	 */
+	abstract String getCoordinates();
 
 }

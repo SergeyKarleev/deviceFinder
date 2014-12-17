@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -12,21 +13,17 @@ import android.widget.Toast;
 
 public class MainActivity extends Activity {
 
-	// private final static String CODE_CALLBACK = "CodeCallBack";
-	// private final static String CODE_GEO = "CodeGEO";
-	//
-	// private final static String PHONE_FIRST = "FirstPhone";
-	// private final static String PHONE_SECOND = "SecondPhone";
-	// private final static String PHONE_THIRD = "ThirdPhone";
+	private final String LOG_TAG = "myLogs";
 
 	EditText etCodeCallback;
 	EditText etCodeGEO;
 	EditText etPhone1;
 	EditText etPhone2;
 	EditText etPhone3;
-
+	
 	private final static String HIDE_STRING = "**********";
-
+	
+	
 	SharedPreferences sPref;
 
 	@Override
@@ -56,6 +53,7 @@ public class MainActivity extends Activity {
 	}
 
 	private String fieldFilling(int value) {
+		Log.d(LOG_TAG, "load hash: "+value);
 		if (value != 0) {
 			return HIDE_STRING;
 		}
@@ -83,23 +81,17 @@ public class MainActivity extends Activity {
 			try {
 				Editor ed = sPref.edit();
 
-				if (etCodeCallback.getText().toString() != HIDE_STRING)
-					ed.putInt(SMSMonitor.CODE_CALLBACK, etCodeCallback
-							.getText().toString().hashCode());
+				putEditor(ed, SMSMonitor.CODE_CALLBACK, etCodeCallback
+							.getText().toString());
+				putEditor(ed, SMSMonitor.CODE_GEO, etCodeGEO
+						.getText().toString());
+				putEditor(ed, SMSMonitor.PHONE_FIRST, etPhone1
+						.getText().toString());
+				putEditor(ed, SMSMonitor.PHONE_SECOND, etPhone2
+						.getText().toString());
+				putEditor(ed, SMSMonitor.PHONE_THIRD, etPhone3
+						.getText().toString());
 
-				if (etCodeGEO.getText().toString() != HIDE_STRING)
-					ed.putInt(SMSMonitor.CODE_GEO, etCodeGEO.getText()
-							.toString().hashCode());
-
-				if (etPhone1.getText().toString() != HIDE_STRING)
-					ed.putInt(SMSMonitor.PHONE_FIRST, etPhone1.getText()
-							.toString().hashCode());
-				if (etPhone2.getText().toString() != HIDE_STRING)
-					ed.putInt(SMSMonitor.PHONE_SECOND, etPhone2.getText()
-							.toString().hashCode());
-				if (etPhone3.getText().toString() != HIDE_STRING)
-					ed.putInt(SMSMonitor.PHONE_THIRD, etPhone3.getText()
-							.toString().hashCode());
 				ed.commit();
 				Toast.makeText(this,
 						getResources().getString(R.string.message_save_ok),
@@ -118,6 +110,13 @@ public class MainActivity extends Activity {
 		}
 	}
 
+	private void putEditor(Editor ed,String key, String value){
+		if (!value.equals(HIDE_STRING)){
+			ed.putInt(key, value.hashCode());
+			Log.d(LOG_TAG, key+": "+value+" - hash: "+value.hashCode());
+		}
+		return;
+	}
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
