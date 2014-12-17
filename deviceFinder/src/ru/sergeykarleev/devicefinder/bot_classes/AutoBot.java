@@ -33,7 +33,7 @@ public abstract class AutoBot {
 	 * eMail)
 	 * Здесь формируется соответствующий Intent и вызывается Activity с данным Intent
 	 */
-	abstract void activate();
+	abstract public void activate();
 	
 	/**
 	 * Метод получения координат любым доступным способом.

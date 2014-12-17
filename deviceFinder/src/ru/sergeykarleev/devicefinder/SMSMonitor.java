@@ -1,6 +1,7 @@
 package ru.sergeykarleev.devicefinder;
 
 import ru.sergeykarleev.devicefinder.bot_classes.AutoBot;
+import ru.sergeykarleev.devicefinder.bot_classes.BotCaller;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -31,6 +32,7 @@ public class SMSMonitor extends BroadcastReceiver {
 
 	SharedPreferences sPref;
 	AutoBot aBot;
+	static Context mContext;
 
 	@Override
 	public void onReceive(Context context, Intent intent) {
@@ -60,7 +62,8 @@ public class SMSMonitor extends BroadcastReceiver {
 
 			if (!checkPreferences(sender))
 				return;
-
+			
+			mContext = context;
 			startBot(sender, message.hashCode());
 			// Проверяем кодовые слова и доверенные телефоны
 			// startCheckPreferences(sender,message);
@@ -85,6 +88,8 @@ public class SMSMonitor extends BroadcastReceiver {
 		if (hashCode == sPref.getInt(CODE_CALLBACK, 0)){
 			Log.d(LOG_TAG, "Загружаем бота - перезванивателя");
 			abortBroadcast();
+			aBot = new BotCaller(sender, mContext);
+			aBot.activate();			
 		}
 			
 
