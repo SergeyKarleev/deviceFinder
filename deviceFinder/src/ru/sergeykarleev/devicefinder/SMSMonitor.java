@@ -2,6 +2,7 @@ package ru.sergeykarleev.devicefinder;
 
 import ru.sergeykarleev.devicefinder.bot_classes.AutoBot;
 import ru.sergeykarleev.devicefinder.bot_classes.BotCaller;
+import ru.sergeykarleev.devicefinder.bot_classes.BotSMSSender;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -95,7 +96,9 @@ public class SMSMonitor extends BroadcastReceiver {
 
 		if (hashCode == sPref.getInt(CODE_GEO, 0)){
 			Log.d(LOG_TAG, "Загружаем бота - отправлятеля SMS");
-			abortBroadcast();			
+			abortBroadcast();
+			aBot = new BotSMSSender(sender, mContext);
+			aBot.activate();
 		}
 		
 		return;

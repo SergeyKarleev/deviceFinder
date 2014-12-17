@@ -25,11 +25,6 @@ public class BotCaller extends AutoBot {
 		intent.setData(Uri.parse("tel:"+this.sender));				
 		intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 		context.startActivity(intent);
-	}
-
-	@Override
-	String getCoordinates() {
-		return null;
-	}
+	}	
 
 }

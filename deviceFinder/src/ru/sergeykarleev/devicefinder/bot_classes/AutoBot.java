@@ -34,12 +34,6 @@ public abstract class AutoBot {
 	 * Здесь формируется соответствующий Intent и вызывается Activity с данным Intent
 	 */
 	abstract public void activate();
-	
-	/**
-	 * Метод получения координат любым доступным способом.
-	 * Вызывается из метода activate()	 
-	 * @return строка с координатами
-	 */
-	abstract String getCoordinates();
+		
 
 }
