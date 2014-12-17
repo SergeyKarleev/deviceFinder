@@ -82,12 +82,18 @@ public class SMSMonitor extends BroadcastReceiver {
 		if (hashCode == 0)
 			return;
 		
-		if (hashCode == sPref.getInt(CODE_CALLBACK, 0))
+		if (hashCode == sPref.getInt(CODE_CALLBACK, 0)){
 			Log.d(LOG_TAG, "Загружаем бота - перезванивателя");
+			abortBroadcast();
+		}
+			
 
-		if (hashCode == sPref.getInt(CODE_GEO, 0))
+		if (hashCode == sPref.getInt(CODE_GEO, 0)){
 			Log.d(LOG_TAG, "Загружаем бота - отправлятеля SMS");
-
+			abortBroadcast();			
+		}
+		
+		return;
 	}
 
 	/**

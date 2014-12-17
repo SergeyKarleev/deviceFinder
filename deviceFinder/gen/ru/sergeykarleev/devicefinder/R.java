@@ -41,27 +41,31 @@ public final class R {
         public static final int main=0x7f070000;
     }
     public static final class string {
-        public static final int action_settings=0x7f050001;
-        public static final int app_name=0x7f050000;
-        public static final int button_exit=0x7f050009;
-        public static final int button_save=0x7f050008;
-        public static final int message_save_duplicate=0x7f05000b;
-        public static final int message_save_error=0x7f05000c;
+        public static final int action_settings=0x7f050003;
+        public static final int app_MainActivity=0x7f050001;
+        public static final int app_name=0x7f050002;
+        /**  Служебные данные 
+         */
+        public static final int app_package=0x7f050000;
+        public static final int button_exit=0x7f05000b;
+        public static final int button_save=0x7f05000a;
+        public static final int message_save_duplicate=0x7f05000d;
+        public static final int message_save_error=0x7f05000e;
         /**  Сообщения при сохраненнии настроек 
          */
-        public static final int message_save_ok=0x7f05000a;
+        public static final int message_save_ok=0x7f05000c;
         /**  Сообщения мониторинга смс 
          */
-        public static final int monitor_empty_codes=0x7f05000d;
-        public static final int monitor_empty_phones=0x7f05000e;
+        public static final int monitor_empty_codes=0x7f05000f;
+        public static final int monitor_empty_phones=0x7f050010;
         /**  Тексты экрана настроек 
          */
-        public static final int title_code_callback=0x7f050002;
-        public static final int title_code_geo=0x7f050003;
-        public static final int title_phone_1=0x7f050004;
-        public static final int title_phone_2=0x7f050005;
-        public static final int title_phone_3=0x7f050006;
-        public static final int title_phone_hint=0x7f050007;
+        public static final int title_code_callback=0x7f050004;
+        public static final int title_code_geo=0x7f050005;
+        public static final int title_phone_1=0x7f050006;
+        public static final int title_phone_2=0x7f050007;
+        public static final int title_phone_3=0x7f050008;
+        public static final int title_phone_hint=0x7f050009;
     }
     public static final class style {
         /** 

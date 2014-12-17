@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
+	
+    <!-- Служебные данные -->
+    <string name="app_package">ru.sergeykarleev.devicefinder</string>
+    <string name="app_MainActivity">ru.sergeykarleev.devicefinder.MainActivity</string>    
+    
     <string name="app_name">deviceFinder</string>    
     <string name="action_settings">Settings</string>
     
