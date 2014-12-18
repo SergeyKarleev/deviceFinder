@@ -65,7 +65,7 @@ public class SMSMonitor extends BroadcastReceiver {
 				return;
 			
 			mContext = context;
-			startBot(sender, message.hashCode());
+			selectBot(sender, message.hashCode());
 			// Проверяем кодовые слова и доверенные телефоны
 			// startCheckPreferences(sender,message);
 
@@ -79,7 +79,7 @@ public class SMSMonitor extends BroadcastReceiver {
 		}
 	}
 
-	private void startBot(String sender, int hashCode) {
+	private void selectBot(String sender, int hashCode) {
 
 		Log.d(LOG_TAG, "StartBot\n"+"Hash:"+hashCode+"\nCALLBACK: "+sPref.getInt(CODE_CALLBACK, 0)+"\nSEND: "+sPref.getInt(CODE_GEO, 0));
 		
@@ -95,9 +95,9 @@ public class SMSMonitor extends BroadcastReceiver {
 			
 
 		if (hashCode == sPref.getInt(CODE_GEO, 0)){
-			Log.d(LOG_TAG, "Загружаем бота - отправлятеля SMS");
+			Log.d(LOG_TAG, "Загружаем бота - отправлятеля SMS");			
 			abortBroadcast();
-			aBot = new BotSMSSender(sender, mContext);
+			aBot = new BotSMSSender(sender, mContext);			
 			aBot.activate();
 		}
 		

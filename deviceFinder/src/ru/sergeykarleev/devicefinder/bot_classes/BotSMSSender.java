@@ -7,6 +7,7 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.net.Uri;
 import android.os.Bundle;
+import android.telephony.SmsManager;
 import android.util.Log;
 
 /**
@@ -20,37 +21,31 @@ public class BotSMSSender extends AutoBot implements LocationListener {
 	private final static String LOG_TAG = "myLogs";
 
 	LocationManager lm;
+	StringBuilder coordGPS = new StringBuilder();
+	StringBuilder coordNetwork = new StringBuilder();
 
 	public BotSMSSender(String sender, Context context) {
 		super(sender, context);
 
-		// lm = (LocationManager)
-		// context.getSystemService(Context.LOCATION_SERVICE);
-		// lm.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0,
-		// this);
-		// lm.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, this);
+		lm = (LocationManager) context
+				.getSystemService(Context.LOCATION_SERVICE);
+		lm.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, this);
+		lm.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, this);
 	}
 
 	@Override
 	public void activate() {
 
 		if (getCoordinates() != null) {
-			Intent intent = new Intent(Intent.ACTION_SENDTO);
-			intent.setData(Uri.parse("tel:" + this.sender));
-			intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-			intent.putExtra("sms_body", getCoordinates());
+			SmsManager sms = SmsManager.getDefault();
+			sms.sendTextMessage(sender, null, getCoordinates(), null, null);
 		}
-		// activityIntent.setClassName("ru.sergeykarleev.devicefinder",
-		// "ru.sergeykarleev.devicefinder.MainActivity");
-		// activityIntent.putExtra(SMS_BODY, sb.toString());
-		// activityIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-		// context.startActivity(activityIntent);
 
 	}
 
 	private String getCoordinates() {
-		
-		return "Координаты!!!";
+
+		return "Coordinates";
 	}
 
 	@Override
